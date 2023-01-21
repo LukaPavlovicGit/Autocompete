@@ -3,7 +3,7 @@
 This application was intended for Linux machine and provides autocomplete functionality for the given prefix.<br/>
 User passes the prefix and application starts listing all words on the screen starting with a given prefix. Words are read from textual file given by the user and are stored in memory using **TRIE STRUCTURE** which needs to support concurrent insertion and search for the words.<br/>
 
-User gives commands through command line.Here are the commands:<br/>
+User gives commands through command line as shown below.<br/>
 
 1. 	**\_add\_** \<dir\><br/>
 	Adds new directory with textual files. At this point a new thread 'scanner' is created.<br/>
