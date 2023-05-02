@@ -1,5 +1,7 @@
 # Autocompete functionality - multithread solution
 
+## [Official project specification](OS-Domaci4.pdf)
+
 This application was intended for Linux machine and provides autocomplete functionality for the given prefix.<br/>
 User passes the prefix and application starts listing all words on the screen starting with a given prefix. Words are read from textual file given by the user and are stored in memory using **TRIE STRUCTURE** which needs to support concurrent insertion and search for the words.<br/>
 
