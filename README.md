@@ -1,24 +1,41 @@
-# Autocompete functionality
+# Autocomplete Functionality
 
-# [video demonstration](https://drive.google.com/file/d/1yAI4ONXj9ofOa-Vkxinkzu6wDJ0t_gUw/view?usp=drive_link)
+## Resources
+- [Video demonstration](https://drive.google.com/file/d/1yAI4ONXj9ofOa-Vkxinkzu6wDJ0t_gUw/view?usp=drive_link)
+- [Project specification](OS-Domaci4.pdf)
 
-# [project specification](OS-Domaci4.pdf)
+## Overview
+This application is designed for Linux computers and provides an autocomplete function for specified prefixes. It reads words from a text file into memory using a **trie structure** that supports concurrent insertion and searching.
 
-This application is intended for Linux computers and provides an autocomplete function for the specified prefix.<br/>
-The user enters the prefix, and the application begins listing all the words on the screen that begin with the specified prefix. The words are read from a text file specified by the user and stored in memory using the **trie structure**, which must support concurrent insertion and searching for the words.<br/>
+## Command Line Interface
+The user interacts with the application through the following commands:
 
-The user enters commands through the command line, as shown below.<br/>
+1. **`_add\_** \<dir\>
+   - Adds a new directory of text files
+   - Creates a new 'scanner' thread at initialization
 
-1. 	**\_add\_** \<dir\><br/>
-	Adds a new directory of text files. At this time a new thread 'scanner' is created.<br/>
-2. 	**\_stop\_**<br/>
-	Shut down application.<br/>
+2. **`_stop\_**
+   - Shuts down the application
 
-3. 	**\<prefix\>**<br/>
-	Prefix with which the words are matched. If the user enters more than one prefix, only the last one is selected, the others are ignored. The application starts searching the **trie structure** for the words starting with the specified prefix. When a new word is found in the text file that starts with the specified prefix, it is output to the screen. The user can stop the search by pressing the STRL+D key combination and then call the next command.<br/>
+3. **`\<prefix\>**`
+   - Specifies which words to match
+   - If multiple prefixes are entered, only the last one is used
+   - Application searches the trie structure for words starting with the specified prefix
+   - New matching words from text files are displayed on screen
+   - Search can be stopped using CTRL+D, after which the next command can be entered
 
-## Scanner thread
+## Scanner Thread Details
+- The scanner thread monitors the directory for text files
+- When it finds a file, it reads all words from that file
+- Tracks which files have been read and when they were last modified
+- Won't re-read unchanged files that have already been processed
 
-The scanner thread traverses the directory looking for text files. When a file is found, the thread reads all the words from that file. The scanner thread knows which files have been read so far and when they were last modified. In other words, the scanner will not read a file that has already been read and not changed since the last time.<br/>
-
-The text file should contain words separated by SPACE (' '), TAB ('\T') OR ENTER ('\N'). The words must contain characters of the English alphabet. The maximum word length is 63 characters. The word will be ignored if any of these conditions is not met.
+## Text File Requirements
+Text files must follow these rules:
+- Words should be separated by:
+  - SPACE (' ')
+  - TAB ('\t')
+  - ENTER ('\n')
+- Words must contain only English alphabet characters
+- Maximum word length is 63 characters
+- Words not meeting these conditions will be ignored
